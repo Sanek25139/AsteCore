@@ -1,0 +1,15 @@
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.MVVM.deps.json
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.MVVM.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.MVVM.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.csproj.AssemblyReference.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.AssemblyInfoInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.AssemblyInfo.cs
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.csproj.CoreCompileInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.7D3D3445.Up2Date
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\refint\AsteCore.MVVM.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\ref\AsteCore.MVVM.dll

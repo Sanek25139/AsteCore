@@ -1,0 +1,15 @@
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\bin\Debug\net8.0\AsteCore.EF.deps.json
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\bin\Debug\net8.0\AsteCore.EF.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\bin\Debug\net8.0\AsteCore.EF.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\bin\Debug\net8.0\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\bin\Debug\net8.0\AsteCore.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.csproj.AssemblyReference.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.AssemblyInfoInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.AssemblyInfo.cs
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.csproj.CoreCompileInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.578FB7A5.Up2Date
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\refint\AsteCore.EF.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\ref\AsteCore.EF.dll

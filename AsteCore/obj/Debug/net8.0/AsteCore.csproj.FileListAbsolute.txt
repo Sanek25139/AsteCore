@@ -1,0 +1,11 @@
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.AssemblyInfoInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.AssemblyInfo.cs
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.csproj.CoreCompileInputs.cache
+C:\Users\msi\source\repos\AsteCore\AsteCore\bin\Debug\net8.0\AsteCore.deps.json
+C:\Users\msi\source\repos\AsteCore\AsteCore\bin\Debug\net8.0\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore\bin\Debug\net8.0\AsteCore.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\refint\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.pdb
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\ref\AsteCore.dll
