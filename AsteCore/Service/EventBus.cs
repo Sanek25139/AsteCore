@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows;
-
-
-namespace StarterKit.WPF.Service
+namespace AsteCore.Service
 {
     public class EventBus
     {

@@ -1,5 +1,11 @@
 <Solution>
-  <Project Path="AsteCore.EF/AsteCore.EF.csproj" />
-  <Project Path="AsteCore.MVVM/AsteCore.MVVM.csproj" />
-  <Project Path="AsteCore/AsteCore.csproj" />
+  <Project Path="AsteCore.EF/AsteCore.EF.csproj">
+    <BuildType Project="Release" />
+  </Project>
+  <Project Path="AsteCore.MVVM/AsteCore.MVVM.csproj">
+    <BuildType Project="Release" />
+  </Project>
+  <Project Path="AsteCore/AsteCore.csproj">
+    <BuildType Project="Release" />
+  </Project>
 </Solution>

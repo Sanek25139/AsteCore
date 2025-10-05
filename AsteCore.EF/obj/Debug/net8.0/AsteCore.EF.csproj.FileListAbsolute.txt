@@ -13,3 +13,4 @@ C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.dll
 C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\refint\AsteCore.EF.dll
 C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.pdb
 C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\ref\AsteCore.EF.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.EF\obj\Debug\net8.0\AsteCore.EF.sourcelink.json
