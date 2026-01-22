@@ -13,3 +13,5 @@ C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.
 C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\refint\AsteCore.MVVM.dll
 C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.pdb
 C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\ref\AsteCore.MVVM.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\obj\Debug\net8.0\AsteCore.MVVM.sourcelink.json
+C:\Users\msi\source\repos\AsteCore\AsteCore.MVVM\bin\Debug\net8.0\AsteCore.xml

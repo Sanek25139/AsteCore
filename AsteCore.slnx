@@ -1,11 +1,7 @@
 <Solution>
-  <Project Path="AsteCore.EF/AsteCore.EF.csproj">
-    <BuildType Project="Release" />
-  </Project>
-  <Project Path="AsteCore.MVVM/AsteCore.MVVM.csproj">
-    <BuildType Project="Release" />
-  </Project>
-  <Project Path="AsteCore/AsteCore.csproj">
-    <BuildType Project="Release" />
-  </Project>
+  <Project Path="AsteCore.EF/AsteCore.EF.csproj" />
+  <Project Path="AsteCore.FileEntity/AsteCore.FileEntity.csproj" Id="c617628f-3bfe-4c36-9f3a-ca56e87db93b" />
+  <Project Path="AsteCore.MVVM/AsteCore.MVVM.csproj" />
+  <Project Path="AsteCore.Net/AsteCore.Net.csproj" Id="8332a22a-c323-4ee3-a21c-b9090aba9ce8" />
+  <Project Path="AsteCore/AsteCore.csproj" />
 </Solution>

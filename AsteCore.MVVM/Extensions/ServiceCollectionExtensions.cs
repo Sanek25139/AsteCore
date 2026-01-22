@@ -1,5 +1,6 @@
-﻿using System.ComponentModel;
+﻿using AsteCore.MVVM.Interface;
 using Microsoft.Extensions.DependencyInjection;
+using System.ComponentModel;
 
 namespace AsteCore.MVVM.Extensions
 {

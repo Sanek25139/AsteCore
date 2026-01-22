@@ -2,6 +2,8 @@
 {
     public interface IFSM
     {
-        FSM FSM { get; set; }
+       string FirstName { get; set; }
+       string SecondName { get; set; }
+       string? MiddleName { get; set; }
     }
 }

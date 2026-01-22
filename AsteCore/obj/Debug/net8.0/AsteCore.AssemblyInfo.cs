@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AsteCore")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2876a6eb8bcb488f714fc2f9003b1a91a4e7038c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AsteCore")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AsteCore")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

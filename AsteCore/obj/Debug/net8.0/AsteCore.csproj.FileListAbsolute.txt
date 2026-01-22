@@ -9,3 +9,6 @@ C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.dll
 C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\refint\AsteCore.dll
 C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.pdb
 C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\ref\AsteCore.dll
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.sourcelink.json
+C:\Users\msi\source\repos\AsteCore\AsteCore\bin\Debug\net8.0\AsteCore.xml
+C:\Users\msi\source\repos\AsteCore\AsteCore\obj\Debug\net8.0\AsteCore.xml

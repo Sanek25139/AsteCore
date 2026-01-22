@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AsteCore.MVVM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9fa57740321813e3b177454055a5a4fbcbe0ccf1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2876a6eb8bcb488f714fc2f9003b1a91a4e7038c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AsteCore.MVVM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AsteCore.MVVM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

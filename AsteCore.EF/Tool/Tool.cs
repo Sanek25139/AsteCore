@@ -87,22 +87,6 @@ namespace AsteCore.EF.Tool
 
             return [.. records.Where(record => record.Name != null && record.Name.Contains(text, StringComparison.CurrentCultureIgnoreCase))];
         }
-        public static async Task<ObservableCollection<T>> SearchByFSMAsync<T, TC>(
-        this Task<TC> source,
-        string searchText)
-        where T : BaseEntity, IFSM
-        where TC : IEnumerable<T>
-        {
-            IEnumerable<T> records = await source;
-            ArgumentNullException.ThrowIfNull(records);
-
-            if (string.IsNullOrWhiteSpace(searchText))
-                return [.. records];
-
-            return [.. records.Where(r =>
-                    r.FSM != null &&
-                    r.FSM.Contains(searchText))];
-        }
 
         public static void IsSet<T>(ref T property, T value)
         {

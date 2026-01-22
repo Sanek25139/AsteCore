@@ -44,7 +44,7 @@ namespace AsteCore.EF.Model
             return !(left == right); // Используем перегруженный оператор ==
         }
 
-        public static bool operator ==(BaseEntity<TID> entity, ulong id)
+        public static bool operator ==(BaseEntity<TID> entity, TID id)
         {
             // Проверка на null
             if (entity is null)
@@ -55,7 +55,7 @@ namespace AsteCore.EF.Model
         }
 
         // Перегрузка оператора !=
-        public static bool operator !=(BaseEntity<TID> entity, ulong id)
+        public static bool operator !=(BaseEntity<TID> entity, TID id)
         {
             return !(entity == id); // Используем перегруженный оператор ==
         }
@@ -71,6 +71,5 @@ namespace AsteCore.EF.Model
         }
     }
 
-    public class BaseEntityInt : BaseEntity<int> { }
-    public class BaseEntityUlong : BaseEntity<ulong> { }
+
 }
