@@ -1,8 +1,8 @@
 ﻿using AsteCore.Net.Signal;
 using AsteCore.Service;
-using System.Data;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 
 
 namespace AsteCore.Net
@@ -58,46 +58,29 @@ namespace AsteCore.Net
                         break;
                     try
                     {
-                        TcpCommand? baseCommand = TcpCommand.Deserialize(message);
-                        if (baseCommand == null) return;
+                        var command = JsonSerializer.Deserialize<TcpCommand>(message);
+                        if (command == null) continue;
+                        if(command.TypeData == null) continue;
 
-                        // Получаем тип данных через отражение
-                        Type? dataType = GetDataTypeFromTcpCommand(baseCommand);
-                        if (dataType != null)
-                        {
-                            var data = baseCommand.Data.ToObject(dataType);
-                            if (data != null)
-                            {
-                                await eventBus.InvokeAsync((dynamic)data);
-                            }
-                        }
+                        var type = Type.GetType(command.TypeData);
+                        if (type == null) continue;
+
+                        var data = command.RawData.Deserialize(type);
+                        if(data == null) continue;
+
+                        await eventBus.InvokeAsync((dynamic)data);
                     }
                     catch
                     {
 
                     }
                     
-
                 }
             }
             finally
             {
-                // переделать на EventBus
-                //MainThread.BeginInvokeOnMainThread(() => ConnectionLost?.Invoke());
+
             }
-        }
-
-        private static Type? GetDataTypeFromTcpCommand(TcpCommand command)
-        {
-            // Способ 1: Через reflection получить generic тип
-            var commandType = command.GetType();
-
-            if (commandType.IsGenericType && commandType.GetGenericTypeDefinition() == typeof(TcpCommand<>))
-            {
-                return commandType.GetGenericArguments()[0];
-            }
-
-            return null;
         }
 
         public async Task<bool> RequestAsync(string command)

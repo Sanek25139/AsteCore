@@ -1,7 +1,7 @@
 ﻿namespace AsteCore.EF.Model
 {
     public class ManyToMany<TLeft, TRight, TID>
-    where TID : IEquatable<TID>
+    where TID : struct, IEquatable<TID>
     where TLeft : BaseEntity<TID>
     where TRight : BaseEntity<TID>
     {

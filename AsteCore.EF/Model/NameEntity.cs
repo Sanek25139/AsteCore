@@ -2,7 +2,7 @@
 
 namespace AsteCore.EF.Model
 {
-    public class NameEntity<TID> : BaseEntity<TID>, IName where TID : IEquatable<TID> 
+    public class NameEntity<TID> : BaseEntity<TID>, IName where TID : struct, IEquatable<TID> 
     {
         public string Name { get; set; } = null!;
 

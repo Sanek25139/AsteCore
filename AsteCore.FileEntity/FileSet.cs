@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static AsteCore.FileEntity.StaticSettings;
 
 namespace AsteCore.FileEntity
 {
@@ -83,7 +84,7 @@ namespace AsteCore.FileEntity
         public void AcceptChanges() => IsDirty = false;
 
 
-        public void UseDefault()
+        private void UseDefault()
         {
             _values.Clear();
             if (DefaultValue != null)
@@ -93,22 +94,18 @@ namespace AsteCore.FileEntity
             MarkDirty();
         }
 
-        public string Serializable()
+        private string Serializable()
         {
             var values = _values.Select(fo => fo.Value)
                            .Where(v => v != null)
                            .ToList();
 
-            return JsonSerializer.Serialize(values,
-                new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
+            return JsonSerializer.Serialize(values, JsonOptions);
         }
 
         public void Load()
         {
+
             try
             {
                 string json = File.ReadAllText(FullPath);
@@ -177,6 +174,8 @@ namespace AsteCore.FileEntity
 
         public void Save()
         {
+            //:TODO сделать чтоб при пустой колекции файл удалялся а при null значениях они не учитывались 
+
             Directory.CreateDirectory(System.IO.Path.GetDirectoryName(FullPath)!);
 
             if (IsDirty)

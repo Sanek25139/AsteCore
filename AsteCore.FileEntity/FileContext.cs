@@ -4,20 +4,28 @@ namespace AsteCore.FileEntity
 {
     public abstract class FileContext
     {
+        private bool _uploaded;
+
         protected Dictionary<Type,object> FileSets { get; set; } = [];
         protected Dictionary<Type,object> FileObjects { get; set; } = [];
-
-        protected Dictionary<Type, object> MultyFileSets { get; set; } = [];
+        protected Dictionary<Type, object> MultiFileSets { get; set; } = [];
 
         public void Create()
         {
+            if (_uploaded) return;
+
             Registration();
             Load();
+
+            _uploaded = true;
         }
         public async Task CreateAsync()
         {
+            if (_uploaded) return;
+
             Registration();
             await LoadAsync();
+            _uploaded = true;
         }
 
         /// <summary>
@@ -37,10 +45,15 @@ namespace AsteCore.FileEntity
         }
 
 
-        protected void RegisterMultySet<T>(Func<T,string> fileName, string filePath, string? nameDirectory = null)
+        protected void RegisterMultySet<T>(string filePath, string? nameDirectory = null, Func<T, string>? fileName = null)
         {
-            var set = new MultyFileSet<T>(fileName, filePath, nameDirectory);
-            FileSets.Add(typeof(T), set);
+            var set = new MultiFileSet<T>(filePath, nameDirectory, fileName);
+            MultiFileSets.Add(typeof(T), set);
+        }
+        protected void RegisterMultySet<T>(IEnumerable<T> defaultValues, string filePath, string? nameDirectory = null, Func<T, string>? fileName = null)
+        {
+            var set = new MultiFileSet<T>(defaultValues,filePath, nameDirectory, fileName);
+            MultiFileSets.Add(typeof(T), set);
         }
 
         protected void RegisterObject<T>(string filePath,string? name = null)
@@ -58,7 +71,14 @@ namespace AsteCore.FileEntity
         {
             if(FileSets.TryGetValue(typeof(T), out var set))
                 return (IFileCollection<T>)set;
-               
+
+            throw new ArgumentException("Unregistered type");
+        }
+        public IFileCollection<T> MultiSet<T>()
+        {
+            if (MultiFileSets.TryGetValue(typeof(T), out var set))
+                return (IFileCollection<T>)set;
+
             throw new ArgumentException("Unregistered type");
         }
         public IFileObject<T> SetObject<T>()
@@ -68,86 +88,51 @@ namespace AsteCore.FileEntity
 
             throw new ArgumentException("Unregistered type");
         }
+
+        private IEnumerable<object> GetFiles() => new List<object>(FileSets.Values).Concat(FileObjects.Values).Concat(MultiFileSets.Values);
+
         public void SaveChanges()
         {
-            var files = new List<object>( FileSets.Values).Concat( FileObjects.Values).Concat(MultyFileSets.Values);
-
-            foreach (var file in files)
-            {
-                
+            foreach (var file in GetFiles())
+            {    
                 if(file is not IChangeTracking tracking || file is not IFileSave fileSave)
                     continue;
 
-                try
-                {
-                    fileSave.Save();
-                    tracking.AcceptChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                fileSave.Save();
+                tracking.AcceptChanges();
             }
         }
         public async Task SaveChangesAsync()
         {
-            var files = new List<object>(FileSets.Values).Concat(FileObjects.Values).Concat(MultyFileSets.Values);
-
-            foreach (var file in files)
+            foreach (var file in GetFiles())
             {
                 if (file is not IChangeTracking tracking || file is not IFileSave fileSave)
                     continue;
 
-                try
-                {
-                    await fileSave.SaveAsync();
-                    tracking.AcceptChanges();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                await fileSave.SaveAsync();
+                tracking.AcceptChanges();
             }
         }
 
-        public void Load()
+        private void Load()
         {
-            var files = new List<object>(FileSets.Values).Concat(FileObjects.Values).Concat(MultyFileSets.Values);
-
-            foreach (var file in files)
-            {
-                if (file is not IFileLoading fileLoad)
-                    continue;
-                try
-                {
-                    fileLoad.Load();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
-            }
-        }
-        public async Task LoadAsync()
-        {
-            var files = new List<object>(FileSets.Values).Concat(FileObjects.Values).Concat(MultyFileSets.Values);
-
-            foreach (var file in files)
+            foreach (var file in GetFiles())
             {
                 if (file is not IFileLoading fileLoad)
                     continue;
 
-                try
-                {
-                    await fileLoad.LoadAsync();
-                }
-                catch (Exception)
-                {
-                    throw;
-                }
+                fileLoad.Load();
             }
         }
+        private async Task LoadAsync()
+        {
+            foreach (var file in GetFiles())
+            {
+                if (file is not IFileLoading fileLoad)
+                    continue;
 
-
+                await fileLoad.LoadAsync();
+            }
+        }
     }
 }

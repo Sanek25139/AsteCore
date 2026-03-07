@@ -32,7 +32,7 @@ namespace AsteCore.Service
         public EventBus()
         {
         }
-        internal EventToken SysSubscribe<T>(ICallback handler)
+        private EventToken SysSubscribe<T>(ICallback handler)
         {
             Type key = typeof(T);
 
@@ -54,7 +54,7 @@ namespace AsteCore.Service
             return new EventToken(key, handler, SysUnsubscribe);
         }
 
-        internal void SysUnsubscribe(Type key, ICallback handler)
+        private void SysUnsubscribe(Type key, ICallback handler)
         {
             bool removed = false;
             lock (_lockObject)
@@ -70,7 +70,7 @@ namespace AsteCore.Service
                 handler.Dispose();
         }
 
-        internal void SysUnsubscribe<T>(ICallback callback)
+        private void SysUnsubscribe<T>(ICallback callback)
         {
             SysUnsubscribe(typeof(T), callback);
         }
@@ -369,6 +369,7 @@ namespace AsteCore.Service
                 try
                 {
                     await callback.InvokeOnTimeoutAsync();
+                    callback.Dispose();
                 }
                 catch (Exception ex)
                 {

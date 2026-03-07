@@ -1,51 +1,50 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+﻿using System.Text.Json;
 
 namespace AsteCore.Net
 {
     public class TcpCommand
     {
-        public object TypeCommand { get; set; }
-        public string Type {  get; set; }
-        public string TypeData { get; set; } // Название типа вместо Type
-        public JToken Data { get; set; } // Данные в сыром виде
+        public byte TypeCommand { get; set; }
+        public JsonElement RawData { get; set; } // Данные в сыром виде
+
+        public string? TypeData { get; set; }
 
 #pragma warning disable CS8618
         public TcpCommand() { }
-
-        public TcpCommand(object typeCommand)
-        {
-            TypeCommand = typeCommand;
-            Type = typeCommand.GetType().FullName!;
-        }
 #pragma warning restore CS8618
+        public TcpCommand(Enum typeCommand, object? data = null)
+        {
+            TypeCommand = Convert.ToByte(typeCommand);
+
+            if (data != null)
+            {
+                TypeData = data.GetType().AssemblyQualifiedName;
+                RawData = JsonSerializer.SerializeToElement(data);
+            }
+        }
+
 
         public string Serialize()
         {
-            return JsonConvert.SerializeObject(this, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All // Сохраняет информацию о типах
-            });
+            return JsonSerializer.Serialize(this);
         }
 
         public static TcpCommand Deserialize(string json)
         {
-            return JsonConvert.DeserializeObject<TcpCommand>(json, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            })!;
+            return JsonSerializer.Deserialize<TcpCommand>(json)!;
         }
+
         // Метод для получения типизированных данных
         public T GetData<T>()
         {
-            return Data.ToObject<T>()!;
+            return RawData.Deserialize<T>()!;
         }
         // Метод для проверки типа данных
-        public bool IsData<T>() 
+        public bool IsData<T>()
         {
             try
             {
-                return Data.ToObject<T>() != null;
+                return RawData.Deserialize<T>() != null;
             }
             catch
             {
@@ -54,30 +53,5 @@ namespace AsteCore.Net
         }
     }
 
-    public class TcpCommand<TJD> : TcpCommand
-    {
-        public new TJD Data
-        {
-            get => base.GetData<TJD>();
-            set
-            {
-                base.Data = JToken.FromObject(value!);
-                base.TypeData = typeof(TJD).AssemblyQualifiedName!;
-            }
-        }
-
-        public TcpCommand(object typeCommand, TJD data) : base(typeCommand) 
-        {
-            Data = data;
-            TypeData = typeof(TJD).ToString();
-        }
-
-        public static new TcpCommand<TJD> Deserialize(string json)
-        {
-            return JsonConvert.DeserializeObject<TcpCommand<TJD>>(json, new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            })!;
-        }
-    }
+    public class TcpCommand<T>(Enum typeCommand, T data) : TcpCommand(typeCommand, data!);
 }

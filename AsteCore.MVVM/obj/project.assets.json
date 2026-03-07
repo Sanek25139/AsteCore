@@ -55,7 +55,7 @@
       },
       "AsteCore/1.0.0": {
         "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
+        "framework": "Unsupported,Version=v0.0",
         "compile": {
           "bin/placeholder/AsteCore.dll": {}
         },
@@ -261,8 +261,19 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Проект AsteCore несовместим с net8.0 (.NETCoreApp,Version=v8.0). Проект AsteCore поддерживает: net10.0 (.NETCoreApp,Version=v10.0)",
+      "libraryId": "AsteCore",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

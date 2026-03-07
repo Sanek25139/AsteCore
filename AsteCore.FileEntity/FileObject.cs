@@ -1,5 +1,6 @@
 ﻿using AsteCore.FileEntity.Interfaces;
 using System.Text.Json;
+using static AsteCore.FileEntity.StaticSettings;
 
 namespace AsteCore.FileEntity
 {
@@ -49,6 +50,14 @@ namespace AsteCore.FileEntity
             Path = string.Empty;
             Name = string.Empty;
         }
+
+        public void Update(Action<T> onUpdate)
+        {
+            if (Value == null) return;
+            onUpdate.Invoke(Value);
+            MarkDirty();
+        }
+
         public void MarkDirty() => IsDirty = true;
         public void AcceptChanges() => IsDirty = false;
 
@@ -57,19 +66,12 @@ namespace AsteCore.FileEntity
 
         public string Serializable()
         {
-            Value ??= default;
 
-            return JsonSerializer.Serialize(Value,
-                new JsonSerializerOptions
-                {
-                    WriteIndented = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                });
+            return JsonSerializer.Serialize(Value, JsonOptions);
         }
 
         public void Load()
-        {
-            
+        {          
             try
             {
                 string json = File.ReadAllText(FullPath);
@@ -83,11 +85,9 @@ namespace AsteCore.FileEntity
             {
                 throw;
             }
-
         }
         public async Task LoadAsync()
         {
-
             try
             {
                 string json = await File.ReadAllTextAsync(FullPath);
@@ -103,27 +103,42 @@ namespace AsteCore.FileEntity
             }
         }
 
+        private string? SysSave()
+        {
+            if (!IsDirty) 
+                return null;
+
+            else if (Value == null)
+            {
+                if (File.Exists(FullPath))
+                    File.Delete(FullPath);
+
+                AcceptChanges();
+                return null;
+            }
+
+
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(FullPath)!);
+
+            return Serializable();
+        }
         public void Save()
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(FullPath)!);
-
-            string json = Serializable();
-            File.WriteAllText(FullPath, json);
+            if(SysSave() is string json)
+                File.WriteAllText(FullPath, json);
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(FullPath)!);
-
-            string json = Serializable();
-            return File.WriteAllTextAsync(FullPath, json);
+            if (SysSave() is string json)
+              await File.WriteAllTextAsync(FullPath, json);
         }
 
         private void Deserialize(string json)
         {
             try
             {
-                var value = JsonSerializer.Deserialize<T>(json);
+                var value = JsonSerializer.Deserialize<T>(json,JsonOptions);
                 if (value is not null)
                     _value = value;
                 else

@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Reflection;
-
-namespace AsteCore.EF.Model
+﻿namespace AsteCore.EF.Model
 {
-    public class BaseEntity
+    public abstract class BaseEntity()
     {
-
+        public abstract void ResetId();
     }
 
-    public class BaseEntity<TID> : BaseEntity where TID : IEquatable<TID>
+    public class BaseEntity<TID> : BaseEntity where TID : struct, IEquatable<TID>
     {
-#pragma warning disable CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Рассмотрите возможность добавления модификатора "required" или объявления значения, допускающего значение NULL.
         public TID Id { get; set; }
-#pragma warning restore CS8618 // Поле, не допускающее значения NULL, должно содержать значение, отличное от NULL, при выходе из конструктора. Рассмотрите возможность добавления модификатора "required" или объявления значения, допускающего значение NULL.
-        
+
+        public sealed override void ResetId()
+        {
+            Id = default;
+        }
         public override bool Equals(object? obj)
         {
             if (obj is BaseEntity<TID> entity)

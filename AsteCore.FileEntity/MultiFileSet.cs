@@ -1,13 +1,17 @@
 ﻿using AsteCore.FileEntity.Interfaces;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text;
 using System.Text.Json.Nodes;
 
 namespace AsteCore.FileEntity
 {
-    public class MultyFileSet<T> : FileBase, IFileCollection<T>, IChangeTracking, IFileSave, IFileLoading
+    public class MultiFileSet<T> : FileBase, IFileCollection<T>, IChangeTracking, IFileSave, IFileLoading
     {
         private List<FileObject<T>> _addedItems = [];
         private List<FileObject<T>> _removedItems = [];
+
+        private IEnumerable<T>? _dafaultValue;
 
         private readonly List<FileObject<T>> _values = [];
         private readonly Func<T, string> _fileName;
@@ -15,13 +19,21 @@ namespace AsteCore.FileEntity
 
         public IEnumerable<IFileObject<T>> Objects { get => _values; }
 
-        public MultyFileSet(Func<T, string> fileName, string path, string? nameDirectory = null)
+        public MultiFileSet(string path, string? nameDirectory = null, Func<T, string>? fileName = null)
         {
-            _fileName = fileName;
+            _fileName = fileName ?? DefaultName;
             Path = path;
             Name = nameDirectory ?? typeof(T).Name + "s";
         }
-
+        public MultiFileSet(IEnumerable<T> defaultValue, string path, string? nameDirectory = null, Func<T, string>? fileName = null)
+        {
+            _fileName = fileName ?? DefaultName;
+            Path = path;
+            Name = nameDirectory ?? typeof(T).Name + "s";
+            _dafaultValue = defaultValue;
+        }
+        
+        private string DefaultName(T item) => $"{item!.GetType().Name}_{Count + 1}";
         public int Count => _values.Count;
 
         public bool IsReadOnly => false;
@@ -37,7 +49,10 @@ namespace AsteCore.FileEntity
         }
         public IFileObject<T>? Add(T item)
         {
-            FileObject<T> fileObj = new(FullPath, _fileName.Invoke(item));
+            FileObject<T> fileObj = new(FullPath, _fileName.Invoke(item))
+            {
+                Value = item
+            };
             _values.Add(fileObj);
             _addedItems.Add(fileObj);
             MarkDirty();
@@ -162,8 +177,10 @@ namespace AsteCore.FileEntity
             _removedItems.Clear();
 
             if (!Directory.Exists(FullPath))
+            {
+                UseDefault();
                 return;
-
+            }
             foreach (var file in Directory.EnumerateFiles(FullPath, "*.json"))
             {
                 var name = System.IO.Path.GetFileName(file);
@@ -191,7 +208,10 @@ namespace AsteCore.FileEntity
             _removedItems.Clear();
 
             if (!Directory.Exists(FullPath))
+            {
+                UseDefault();
                 return;
+            }
 
             foreach (var file in Directory.EnumerateFiles(FullPath, "*.json"))
             {
@@ -211,6 +231,22 @@ namespace AsteCore.FileEntity
             }
 
             AcceptChanges();
+        }
+
+        private void UseDefault()
+        {
+            if (_dafaultValue == null) return;
+            _values.Clear();
+            foreach(T item in _dafaultValue)
+            {
+               _values.Add(new FileObject<T>(FullPath, _fileName.Invoke(item))
+               {
+                   Value = item
+               });
+            }
+            MarkDirty();
+           
+
         }
     }
 }
